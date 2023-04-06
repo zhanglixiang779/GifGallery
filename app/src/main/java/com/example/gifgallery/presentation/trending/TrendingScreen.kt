@@ -8,7 +8,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import com.example.gifgallery.data.local.DbGif
 import com.example.gifgallery.domain.NetworkResult
 import com.example.gifgallery.utils.ErrorToast
 import com.example.gifgallery.utils.Gifs
@@ -34,8 +33,7 @@ fun TrendingScreen(
             }
 
             is NetworkResult.Success -> {
-                val gifs = immutableGifs.data.map { DbGif.fromGif(it) }
-                Gifs(gifs, navToDetail)
+                Gifs(immutableGifs.data, navToDetail)
             }
 
             is NetworkResult.Error -> {

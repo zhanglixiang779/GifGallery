@@ -26,7 +26,7 @@ import coil.compose.AsyncImage
 import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import com.example.gifgallery.R
-import com.example.gifgallery.data.local.DbGif
+import com.example.gifgallery.domain.Gif
 
 val Int.DP: Int
     get() = (this / Resources.getSystem().displayMetrics.density).toInt()
@@ -79,7 +79,7 @@ fun ErrorToast(message: String?) {
 
 @Composable
 fun Gifs(
-    gifs: List<DbGif>,
+    gifs: List<Gif>,
     navToDetail: (id: String?) -> Unit
 ) {
     LazyVerticalGrid(
@@ -88,7 +88,7 @@ fun Gifs(
     ) {
         items(
             items = gifs,
-            key = { it.gifId.orEmpty() }
+            key = { it.id.orEmpty() }
         ) { gif ->
             GifItem(gif, navToDetail)
         }
@@ -97,17 +97,17 @@ fun Gifs(
 
 @Composable
 private fun GifItem(
-    gif: DbGif,
+    gif: Gif,
     navToDetail: (id: String?) -> Unit
 ) {
     val context = LocalContext.current
     val height = Dp((context.screenWidth.DP.toFloat()))
     Column(
         modifier = Modifier.clickable {
-            navToDetail(gif.gifId)
+            navToDetail(gif.id)
         }
     ) {
-        GifImage(url = gif.url, modifier = Modifier
+        GifImage(url = gif.urlSmall, modifier = Modifier
             .fillMaxWidth()
             .height(height / 3))
         Text(text = gif.title.orEmpty())

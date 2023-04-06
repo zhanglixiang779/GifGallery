@@ -1,5 +1,6 @@
 package com.example.gifgallery.data.remote
 
+import com.example.gifgallery.domain.Gif
 import com.example.gifgallery.domain.detail.DetailRepository
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -11,7 +12,8 @@ class DefaultDetailRepository @Inject constructor(
 
     override fun getGif(id: String): Flow<Gif> {
         return flow {
-            emit(apiService.getGif(id).data ?: Gif())
+            val gif = RemoteGif.toGifLarge(apiService.getGif(id).data ?: RemoteGif())
+            emit(gif)
         }
     }
 }

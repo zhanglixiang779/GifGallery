@@ -1,6 +1,6 @@
 package com.example.gifgallery.data
 
-import com.example.gifgallery.data.local.DbGif
+import com.example.gifgallery.data.local.LocalGif
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -12,8 +12,8 @@ class DefaultSearchRepositoryTest {
     private val fakeApiService = FakeApiService()
     private val fakeGifDao = FakeGifDao()
     private val searchRepository = DefaultSearchRepository(fakeApiService, fakeGifDao)
-    private val cat = DbGif(100, "100", "cat", "www.cat.com")
-    private val dog = DbGif(200, "200", "dog", "www.dog.com")
+    private val cat = LocalGif(100, "100", "cat", "www.cat.com")
+    private val dog = LocalGif(200, "200", "dog", "www.dog.com")
 
     @Test
     fun saveGifsToLocal_verifiesGifsSaved() = runTest {
@@ -38,7 +38,7 @@ class DefaultSearchRepositoryTest {
 
         // Then
         val actual = fakeGifDao.gifs
-        assertEquals(emptyList<List<DbGif>>(), actual)
+        assertEquals(emptyList<List<LocalGif>>(), actual)
     }
 
     @Test

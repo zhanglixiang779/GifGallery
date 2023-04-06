@@ -2,10 +2,10 @@ package com.example.gifgallery.data.local
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.example.gifgallery.data.remote.Gif
+import com.example.gifgallery.domain.Gif
 
 @Entity(tableName = "gifs_table")
-data class DbGif(
+data class LocalGif(
     @PrimaryKey(autoGenerate = true)
     val id: Int,
     val gifId: String?,
@@ -13,12 +13,21 @@ data class DbGif(
     val url: String? = null
 ) {
     companion object {
-        fun fromGif(gif: Gif): DbGif {
-            return DbGif(
+
+        fun fromGif(gif: Gif): LocalGif {
+            return LocalGif(
                 id = 0,
                 gifId = gif.id,
                 title = gif.title,
-                url = gif.images?.fixed_height?.url
+                url = gif.urlSmall
+            )
+        }
+
+        fun toGif(localGif: LocalGif): Gif {
+            return Gif(
+                id = localGif.gifId,
+                title = localGif.title,
+                urlSmall = localGif.url
             )
         }
     }

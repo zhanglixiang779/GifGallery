@@ -1,6 +1,6 @@
 package com.example.gifgallery.domain.detail
 
-import com.example.gifgallery.data.remote.Gif
+import com.example.gifgallery.domain.Gif
 import kotlinx.coroutines.flow.Flow
 
 interface DetailRepository {

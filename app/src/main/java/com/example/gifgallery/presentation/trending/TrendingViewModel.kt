@@ -1,8 +1,8 @@
 package com.example.gifgallery.presentation.trending
 
 import androidx.lifecycle.ViewModel
-import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.AppCoroutineScope
+import com.example.gifgallery.domain.Gif
 import com.example.gifgallery.domain.NetworkResult
 import com.example.gifgallery.domain.trending.TrendingRepository
 import dagger.hilt.android.lifecycle.HiltViewModel

@@ -1,8 +1,7 @@
 package com.example.gifgallery.domain.search
 
-import com.example.gifgallery.data.local.DbGif
-import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.ViewModelCoroutineScope
+import com.example.gifgallery.domain.Gif
 import com.example.gifgallery.domain.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -22,10 +21,10 @@ class SearchUseCase @Inject constructor(
 
     private val queryFlow = MutableStateFlow("")
 
-    private val gifsLocal: Flow<NetworkResult<List<DbGif>>> =
+    private val gifsLocal: Flow<NetworkResult<List<Gif>>> =
         searchRepository.getGifsFromLocal()
             .map { gifs ->
-                NetworkResult.Success(gifs) as NetworkResult<List<DbGif>>
+                NetworkResult.Success(gifs) as NetworkResult<List<Gif>>
             }
             .catch {
                 emit(NetworkResult.Success(emptyList()))
@@ -39,7 +38,7 @@ class SearchUseCase @Inject constructor(
             .flatMapLatest { query -> getGifsFromRemote(query) }
             .onStart { emit(NetworkResult.Success(emptyList())) }
 
-    val gifs: StateFlow<NetworkResult<List<DbGif>>> =
+    val gifs: StateFlow<NetworkResult<List<Gif>>> =
         combine(gifsLocal, gifsRemote) { gifLocal, gifRemote ->
             if (gifRemote == NetworkResult.Loading) {
                 NetworkResult.Loading
@@ -59,9 +58,8 @@ class SearchUseCase @Inject constructor(
     private fun getGifsFromRemote(query: String): Flow<NetworkResult<List<Gif>>> {
         return searchRepository.getGifsFromRemote(query)
             .map { gifs ->
-                val gifsDb = gifs.map { DbGif.fromGif(it) }
                 searchRepository.clearGifsFromLocal()
-                searchRepository.saveGifsToLocal(gifsDb)
+                searchRepository.saveGifsToLocal(gifs)
                 NetworkResult.Success(gifs) as NetworkResult<List<Gif>>
             }
             .onStart {

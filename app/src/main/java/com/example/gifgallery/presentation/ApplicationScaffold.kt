@@ -8,6 +8,7 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
+import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.gifgallery.presentation.detail.DetailScreen
 import com.example.gifgallery.presentation.search.SearchScreen
@@ -15,13 +16,12 @@ import com.example.gifgallery.presentation.trending.TrendingScreen
 
 @Composable
 fun ApplicationScaffold(
-    navController: NavHostController
+    navController: NavHostController = rememberNavController()
 ) {
-    val currentRoute = navController
-        .currentBackStackEntryAsState().value?.destination?.route
+    val currentDestination = navController.currentBackStackEntryAsState().value?.destination
 
-    val shouldShowBottomBar = currentRoute == Destination.Search.route
-            || currentRoute == Destination.Trending.route
+    val shouldShowBottomBar = currentDestination?.route == Destination.Search.route
+            || currentDestination?.route == Destination.Trending.route
 
     Scaffold(
         scaffoldState = rememberScaffoldState(),
@@ -39,7 +39,7 @@ fun ApplicationScaffold(
                             launchSingleTop = true
                         }
                     },
-                    currentDestination = navController.currentBackStackEntryAsState().value?.destination
+                    currentDestination = currentDestination
                 )
             }
         }

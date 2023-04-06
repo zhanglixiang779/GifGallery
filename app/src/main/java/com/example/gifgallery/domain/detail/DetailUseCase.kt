@@ -1,7 +1,7 @@
 package com.example.gifgallery.domain.detail
 
-import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.ViewModelCoroutineScope
+import com.example.gifgallery.domain.Gif
 import com.example.gifgallery.domain.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.FlowPreview

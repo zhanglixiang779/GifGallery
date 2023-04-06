@@ -7,11 +7,11 @@ import kotlinx.coroutines.flow.Flow
 interface GifDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun saveGifs(gifs: List<DbGif>)
+    suspend fun saveGifs(gifs: List<LocalGif>)
 
     @Query("DELETE FROM gifs_table")
     suspend fun clearGifs()
 
     @Query("SELECT * FROM gifs_table")
-    fun getGifs(): Flow<List<DbGif>>
+    fun getGifs(): Flow<List<LocalGif>>
 }

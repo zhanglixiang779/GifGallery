@@ -44,9 +44,9 @@ fun DetailScreen(
         is NetworkResult.Success -> {
             Column(modifier = Modifier.fillMaxWidth().verticalScroll(rememberScrollState())) {
                 val title = gif.data.title
-                val user = gif.data.user?.display_name
-                val description = gif.data.user?.description
-                val avatar = gif.data.user?.avatar_url
+                val displayName = gif.data.displayName
+                val description = gif.data.description
+                val avatarUrl = gif.data.avatarUrl
 
                 title?.let {
                     Text(
@@ -64,12 +64,13 @@ fun DetailScreen(
                     )
                 }
 
-                user?.let {
+                displayName?.let {
                     Row(modifier = Modifier.padding(8.dp)) {
-                        avatar?.let { avatarUrl ->
+                        avatarUrl?.let { url ->
                             GifImage(
-                                url = avatarUrl,
-                                modifier = Modifier.clip(CircleShape).size(44.dp))
+                                url = url,
+                                modifier = Modifier.clip(CircleShape).size(44.dp)
+                            )
                         }
                         Text(modifier = Modifier.padding(8.dp), text = it, fontWeight = FontWeight.Bold)
                     }
@@ -83,7 +84,7 @@ fun DetailScreen(
                         CircularProgressIndicator()
                     }
                     GifImage(
-                        url = gif.data.images?.downsized_large?.url,
+                        url = gif.data.urlLarge,
                         modifier = Modifier.fillMaxWidth(),
                         onSuccess = { isGifLoading = false }
                     )
