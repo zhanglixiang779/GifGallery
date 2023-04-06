@@ -3,7 +3,7 @@ package com.example.gifgallery.presentation.search
 import androidx.lifecycle.ViewModel
 import com.example.gifgallery.data.local.DbGif
 import com.example.gifgallery.domain.search.SearchUseCase
-import com.example.gifgallery.presentation.NetworkResult
+import com.example.gifgallery.domain.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

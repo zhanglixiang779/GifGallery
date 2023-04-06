@@ -3,7 +3,7 @@ package com.example.gifgallery.presentation.detail
 import androidx.lifecycle.ViewModel
 import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.domain.detail.DetailUseCase
-import com.example.gifgallery.presentation.NetworkResult
+import com.example.gifgallery.domain.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.StateFlow
 import javax.inject.Inject

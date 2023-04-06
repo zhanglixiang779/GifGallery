@@ -3,8 +3,8 @@ package com.example.gifgallery.presentation.trending
 import androidx.lifecycle.ViewModel
 import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.AppCoroutineScope
+import com.example.gifgallery.domain.NetworkResult
 import com.example.gifgallery.domain.trending.TrendingRepository
-import com.example.gifgallery.presentation.NetworkResult
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.*

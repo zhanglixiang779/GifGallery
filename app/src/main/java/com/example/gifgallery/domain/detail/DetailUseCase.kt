@@ -2,7 +2,7 @@ package com.example.gifgallery.domain.detail
 
 import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.ViewModelCoroutineScope
-import com.example.gifgallery.presentation.NetworkResult
+import com.example.gifgallery.domain.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.*

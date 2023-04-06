@@ -3,7 +3,7 @@ package com.example.gifgallery.domain.search
 import com.example.gifgallery.data.local.DbGif
 import com.example.gifgallery.data.remote.Gif
 import com.example.gifgallery.di.ViewModelCoroutineScope
-import com.example.gifgallery.presentation.NetworkResult
+import com.example.gifgallery.domain.NetworkResult
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview

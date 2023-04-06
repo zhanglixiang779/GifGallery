@@ -1,4 +1,4 @@
-package com.example.gifgallery.presentation
+package com.example.gifgallery.domain
 
 sealed class NetworkResult<out R> {
     data class Success<out T>(val data: T) : NetworkResult<T>()

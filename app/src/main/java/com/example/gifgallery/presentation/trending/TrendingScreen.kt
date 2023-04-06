@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.example.gifgallery.data.local.DbGif
-import com.example.gifgallery.presentation.NetworkResult
+import com.example.gifgallery.domain.NetworkResult
 import com.example.gifgallery.utils.ErrorToast
 import com.example.gifgallery.utils.Gifs
 
