@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GifGallery</string>
+    <string name="textfield_placeholder">Search Giphy</string>
+    <string name="error_message">Something went wrong</string>
+</resources>
