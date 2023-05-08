@@ -1,6 +1,7 @@
 package com.example.gifgallery.data
 
 import com.example.gifgallery.data.local.LocalGif
+import com.example.gifgallery.data.remote.RemoteGif
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
@@ -12,8 +13,8 @@ class DefaultSearchRepositoryTest {
     private val fakeApiService = FakeApiService()
     private val fakeGifDao = FakeGifDao()
     private val searchRepository = DefaultSearchRepository(fakeApiService, fakeGifDao)
-    private val cat = LocalGif(100, "100", "cat", "www.cat.com")
-    private val dog = LocalGif(200, "200", "dog", "www.dog.com")
+    private val cat = LocalGif(0, "100", "cat", "www.cat.com")
+    private val dog = LocalGif(0, "200", "dog", "www.dog.com")
 
     @Test
     fun saveGifsToLocal_verifiesGifsSaved() = runTest {
@@ -21,7 +22,7 @@ class DefaultSearchRepositoryTest {
         val gifsToBeAdded = listOf(cat, dog)
 
         // When
-        searchRepository.saveGifsToLocal(gifsToBeAdded)
+        searchRepository.saveGifsToLocal(gifsToBeAdded.map { LocalGif.toGif(it) })
 
         // Then
         val actual = fakeGifDao.gifs
@@ -49,7 +50,7 @@ class DefaultSearchRepositoryTest {
         // When
         searchRepository.getGifsFromLocal().collect {
             // Then
-            val expected = listOf(cat, dog)
+            val expected = listOf(cat, dog).map { localGif ->  LocalGif.toGif(localGif) }
             assertEquals(expected, it)
         }
     }
@@ -59,7 +60,7 @@ class DefaultSearchRepositoryTest {
         // When
         searchRepository.getGifsFromRemote("cat").collect {
             // Then
-            val expected = fakeApiService.gifs
+            val expected = fakeApiService.gifs.map { remoteGif ->  RemoteGif.toGifLarge(remoteGif) }
             assertEquals(expected, it)
         }
     }
